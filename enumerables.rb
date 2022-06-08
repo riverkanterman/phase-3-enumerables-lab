@@ -12,13 +12,17 @@ end
 # given an array of spicy foods, **return an array of strings**
 # with the names of each spicy food
 def get_names(spicy_foods)
-  # your code here
+  spicy_foods.map do |food_hash|
+    food_hash[:name]
+  end
 end
 
 # given an array of spicy foods, **return an array of hashes** 
 # where the heat level of the food is greater than 5
 def spiciest_foods(spicy_foods)
-  # your code here
+  spicy_foods.filter do |food_hash|
+    food_hash[:heat_level] > 5
+  end
 end
 
 # given an array of spicy foods, **output to the terminal**
@@ -27,19 +31,25 @@ end
 # HINT: you can use * with a string to produce the correct number of 🌶 emoji. 
 # "hello" * 3 == "hellohellohello"
 def print_spicy_foods(spicy_foods)
-  # your code here
+  spicy_foods.map do |food_hash|
+    puts "#{food_hash[:name]} (#{food_hash[:cuisine]}) | Heat Level: #{"🌶" * food_hash[:heat_level]}"
+  end
 end
 
 # given an array of spicy foods and a string representing a cuisine, **return a single hash**  
 # for the spicy food whose cuisine matches the cuisine being passed to the method
 def get_spicy_food_by_cuisine(spicy_foods, cuisine)
-  # your code here
+  spicy_foods.find do |food_hash|
+    food_hash[:cuisine] == cuisine
+  end
 end
 
 # Given an array of spicy foods, **return an array of hashes** 
 # sorted by heat level from lowest to highest
 def sort_by_heat(spicy_foods)
-  # your code here
+  spicy_foods.sort do |food_hash1, food_hash2|
+    food_hash1[:heat_level] <=> food_hash2[:heat_level]
+  end
 end
 
 # given an array of spicy foods, output to the terminal ONLY 
@@ -47,11 +57,17 @@ end
 # Buffalo Wings (American) | Heat Level: 🌶🌶🌶
 # HINT: Try to use methods you've already written to solve this!
 def print_spiciest_foods(spicy_foods)
-  # your code here
+  print_spicy_foods(spiciest_foods(spicy_foods))
 end
 
 # given an array of spicy foods, return an integer representing 
 # the average heat level of all the spicy foods in the array
 def average_heat_level(spicy_foods)
-  # your code here
+  heat_levels_array = []
+
+  spicy_foods.map do |food_hash|
+    heat_levels_array << food_hash[:heat_level]
+  end
+
+  (heat_levels_array.sum) / heat_levels_array.length
 end
